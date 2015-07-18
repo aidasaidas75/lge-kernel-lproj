@@ -97,7 +97,8 @@ if [ -f arch/arm/boot/zImage ]; then
     # (if you get issues with copying wireless drivers then it's your own fault for not cleaning)
 
     find . -name *.ko | xargs cp -a --target-directory=zip-creator/system/lib/modules/
-    zipfile="$kernel"-kernel_"$target"-"$rel".zip"
+
+    zipfile="$kernel"-kernel_"$target"-"$rel".zip
     cd zip-creator
     rm -f *.zip
     zip -r $zipfile * -x *kernel/.gitignore*
