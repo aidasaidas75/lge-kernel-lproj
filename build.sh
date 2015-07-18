@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Written by cybojenix <anthonydking@gmail.com>
+# Edited by Aidas Lukošius - aidasaidas75 <aidaslukosius75@yahoo.com>
 # credits to Rashed for the base of zip making
 # credits to the internet for filling in else where
 
