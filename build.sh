@@ -6,6 +6,17 @@
 
 echo "this is an open source script, feel free to use and share it"
 
+# Vars
+export LOCALVERSION=~`echo $VER`
+export ARCH=arm
+export SUBARCH=arm
+export KBUILD_BUILD_USER=aidasaidas75
+export KBUILD_BUILD_HOST=
+kernel="LukoSius"
+rel="R13"
+daytime=$(date +%d"-"%m"-"%Y"_"%H"-"%M)
+location=.
+
 # Colorize and add text parameters
 grn=$(tput setaf 2)             #  Green
 txtbld=$(tput bold)             # Bold
@@ -13,27 +24,21 @@ bldgrn=${txtbld}$(tput setaf 2) #  green
 bldblu=${txtbld}$(tput setaf 4) #  blue
 txtrst=$(tput sgr0)             # Reset
 
-daytime=$(date +%d"-"%m"-"%Y"_"%H"-"%M)
 
-location=.
-vendor=lge
-version=3.4.104
-
-if [ -z $target ]; then
-    echo "${bldgrn}choose your target device${txtrst}"
-    echo "${bldblu}1) l7 p705${txtrst}"
-    echo "${bldblu}2) l5 e610${txtrst}"
-    echo "${bldblu}3) l5 e612${txtrst}"
-    echo "${bldblu}4) l7 p700${txtrst}"
-    read -p "1/2/3: " choice
-    case "$choice" in
-        1 ) export target=p705 ; export defconfig=cyanogenmod_u0_nonfc_defconfig;;
-        2 ) export target=e610 ; export defconfig=cyanogenmod_m4_defconfig;;
-        3 ) export target=e612 ; export defconfig=cyanogenmod_m4_nonfc_defconfig;;
-        4 ) export target=p700 ; export defconfig=cyanogenmod_u0_defconfig;;
-        * ) echo "${bldgrn}invalid choice${txtrst}"; sleep 2 ; $0;;
-    esac
-fi # [ -z $target ]
+echo "${bldgrn}Pick variant...${txtrst}"
+select choice in e610 e612
+do
+case "$choice" in
+	"e610")
+		export target="e610"
+		export defconfig="cyanogenmod_m4_defconfig"
+		break;;
+	"e612")
+		export target="e612"
+		export defconfig="cyanogenmod_m4_nonfc_defconfig"
+		break;;
+esac
+done
 
 if [ -z $compiler ]; then
     if [ -f ../arm-eabi-4.6/bin/arm-eabi-* ]; then
@@ -62,7 +67,7 @@ echo "${bldgrn}now building the kernel${txtrst}"
 
 START=$(date +%s)
 
-make $defconfig
+make $config
 
 	# Check cpu's
 	NR_CPUS=$(grep -c ^processor /proc/cpuinfo)
@@ -91,8 +96,7 @@ if [ -f arch/arm/boot/zImage ]; then
     # (if you get issues with copying wireless drivers then it's your own fault for not cleaning)
 
     find . -name *.ko | xargs cp -a --target-directory=zip-creator/system/lib/modules/
-
-    zipfile="$vendor-$target-v$version-$daytime.zip"
+    zipfile="$kernel"-kernel_"$target"-"$rel".zip"
     cd zip-creator
     rm -f *.zip
     zip -r $zipfile * -x *kernel/.gitignore*
