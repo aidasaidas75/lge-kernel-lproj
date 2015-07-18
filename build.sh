@@ -63,7 +63,18 @@ echo "${bldgrn}now building the kernel${txtrst}"
 START=$(date +%s)
 
 make $defconfig
-make -j `cat /proc/cpuinfo | grep "^processor" | wc -l` "$@"
+
+	# Check cpu's
+	NR_CPUS=$(grep -c ^processor /proc/cpuinfo)
+
+	if [ "$NR_CPUS" -le "2" ]; then
+		NR_CPUS=4;
+		echo "Building kernel with 4 CPU threads";
+	else
+		echo "Building kernel with $NR_CPUS CPU threads";
+	fi;
+
+make -j ${NR_CPUS}
 
 ## the zip creation
 if [ -f arch/arm/boot/zImage ]; then
