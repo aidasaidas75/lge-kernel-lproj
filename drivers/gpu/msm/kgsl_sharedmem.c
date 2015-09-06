@@ -787,7 +787,6 @@ _kgsl_sharedmem_ebimem(struct kgsl_memdesc *memdesc,
 {
 	int result = 0;
 
-	memdesc->size = size;
 	memdesc->pagetable = pagetable;
 	memdesc->ops = &kgsl_ebimem_ops;
 	memdesc->physaddr = allocate_contiguous_ebi_nomap(size, SZ_8K);
