@@ -3945,7 +3945,7 @@ static const struct kgsl_functable adreno_functable = {
 	.drawctxt_create = adreno_drawctxt_create,
 	.drawctxt_destroy = adreno_drawctxt_destroy,
 	.setproperty = adreno_setproperty,
-	.postmortem_dump = adreno_dump,
+	/*.postmortem_dump = adreno_dump,*/
 	.next_event = adreno_next_event,
 };
 
