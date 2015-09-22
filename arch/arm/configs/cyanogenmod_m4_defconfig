@@ -3386,7 +3386,7 @@ CONFIG_NLATTR=y
 #
 # LGE platform selection
 #
-# CONFIG_LGE_HANDLE_PANIC is not set
+
 #
 # LGE Factory Feature
 #
