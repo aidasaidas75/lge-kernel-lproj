@@ -68,7 +68,7 @@ static long ratelimit_pages = 32;
 /*
  * Start background writeback (via writeback threads) at this percentage
  */
-int dirty_background_ratio = 10;
+int dirty_background_ratio = 30;
 
 /*
  * dirty_background_bytes starts at 0 (disabled) so that it is a function of
@@ -85,7 +85,7 @@ int vm_highmem_is_dirtyable;
 /*
  * The generator of dirty data starts writeback at this percentage
  */
-int vm_dirty_ratio = 10;
+int vm_dirty_ratio = 30;
 
 /*
  * vm_dirty_bytes starts at 0 (disabled) so that it is a function of
@@ -96,7 +96,7 @@ unsigned long vm_dirty_bytes;
 /*
  * The default intervals between `kupdate'-style writebacks
  */
-#define DEFAULT_DIRTY_WRITEBACK_INTERVAL	 5 * 100 /* centiseconds */
+#define DEFAULT_DIRTY_WRITEBACK_INTERVAL	15 * 100 /* centiseconds */
 #define HIGH_DIRTY_WRITEBACK_INTERVAL		15 * 100 /* centiseconds */
 
 /*
