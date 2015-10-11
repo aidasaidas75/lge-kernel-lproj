@@ -10,10 +10,8 @@ echo "this is an open source script, feel free to use and share it"
 # Vars
 export ARCH=arm
 export SUBARCH=arm
-export KBUILD_BUILD_USER=aidasaidas75
-export KBUILD_BUILD_HOST=
 kernel="LukoSius"
-rel="R15"
+rel="R16"
 daytime=$(date +%d"-"%m"-"%Y"_"%H"-"%M)
 location=.
 
