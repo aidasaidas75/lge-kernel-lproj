@@ -550,7 +550,6 @@ static struct attribute *gpio_attrs[] = {
 	&dev_attr_active_low.attr,
 	NULL,
 };
-ATTRIBUTE_GROUPS(gpio);
 
 /*
  * /sys/class/gpio/gpiochipN/
@@ -737,9 +736,6 @@ int gpio_export(unsigned gpio, bool direction_may_change)
 	if (desc->chip->names && desc->chip->names[gpio - desc->chip->base])
 		ioname = desc->chip->names[gpio - desc->chip->base];
 
-	dev = device_create_with_groups(&gpio_class, desc->chip->dev,
-					MKDEV(0, 0), desc, gpio_groups,
-					ioname ? ioname : "gpio%u", gpio);
 	if (IS_ERR(dev)) {
 		status = PTR_ERR(dev);
 		goto fail_unlock;
